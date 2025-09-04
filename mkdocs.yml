@@ -1,0 +1,7 @@
+site_name: My Docs
+theme:
+  name: material
+
+nav:
+  - 首页: index.md
+  - 随笔: 20250904.md

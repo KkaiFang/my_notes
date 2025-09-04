@@ -1,7 +1,10 @@
 site_name: My Docs
 theme:
-  name: material
+  name: readthedocs
 
 nav:
   - 首页: index.md
   - 随笔: 20250904.md
+  - 测试: 20250904-1.md
+extra_css:
+  - css/extra.css

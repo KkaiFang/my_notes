@@ -8,8 +8,8 @@ body {
 /* 让段落更舒服 */
 /* 只针对正文段落 <p> */
 p {
-    font-size: 25px;      /* 字体大小，默认16，可以改大 */
-    line-height: 2;     /* 行间距，1.6~1.8 比较舒服 */
+    font-size: 20px;      /* 字体大小，默认16，可以改大 */
+    line-height: 1.6;     /* 行间距，1.6~1.8 比较舒服 */
     letter-spacing: 0.05em; /* 字间距，稍微拉开 */
     margin-bottom: 1em;   /* 段落间距 */
 }

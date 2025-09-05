@@ -1,6 +1,6 @@
 site_name: My Docs
 theme:
-  name: material
+  name: readthedocs
 nav:
   - 首页: index.md
   - 随笔: 20250904.md

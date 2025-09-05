@@ -7,3 +7,5 @@ nav:
   - 测试: 20250904-1.md
 extra_css:
   - css/extra.css
+
+site_url: https://KkaiFang.github.io/repo/

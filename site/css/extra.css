@@ -1,7 +1,7 @@
 /* 调整正文文字样式 */
 body {
     font-size: 18px;       /* 默认 16px，可以改大一些 */
-    line-height: 1.8;      /* 行间距（默认 1.4 左右） */
+    line-height: 1.6;      /* 行间距（默认 1.4 左右） */
     letter-spacing: 0.05em; /* 字间距，0.05em ~ 0.1em 比较合适 */
 }
 

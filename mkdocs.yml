@@ -1,4 +1,6 @@
-site_name: My Docs
+site_name: fk的博客
+site_author: fk
+site_description: 这是我的个人博客
 theme:
   name: readthedocs
 nav:

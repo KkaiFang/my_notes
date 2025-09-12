@@ -24,6 +24,8 @@ jobs:
         run: |
           pip install mkdocs
           pip install mkdocs-material
+          pip install mkdocs-document-dates
+          pip install mkdocs-ai-summary-wcowin -i https://pypi.org/simple
 
       - name: Build and Deploy
         run: mkdocs gh-deploy --force

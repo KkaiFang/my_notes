@@ -55,27 +55,29 @@
         <div class="footer-content">
           <div class="footer-visit-count">
             <div class="footer-item">
-              <span>本站访问量：</span>
-              <span id="finicount_views" class="footer-highlight"></span>
+              <span>本站总访问量：</span>
+              <span id="busuanzi_value_site_pv" class="footer-highlight">统计中...</span>
             </div>
-
- 
-
+            <div class="footer-item">
+              <span>访客数：</span>
+              <span id="busuanzi_value_site_uv" class="footer-highlight">统计中...</span>
+            </div>
+            <div class="footer-item">
+              <span>本页阅读量：</span>
+              <span id="busuanzi_value_page_pv" class="footer-highlight">统计中...</span>
+            </div>
             <div class="footer-item runtime-info">
               <span>本站已经运行</span>
-              <span id="box1" class="footer-highlight"></span>
+              <span id="running_time" class="footer-highlight">计算中...</span>
             </div>
           </div>
         </div>
 
         <!-- 移动端简洁布局 -->
         <div class="footer-visit-count-mobile">
-          <span>本站访问量：</span>
-         
-          <span class="runtime-info">
-            <span>本站已经运行</span>
-            <span id="box1_mobile"></span>
-          </span>
+          <span class="footer-item">访问：<span id="busuanzi_value_site_pv" class="footer-highlight">统计中...</span></span>
+          <span class="footer-item">访客：<span id="busuanzi_value_site_uv" class="footer-highlight">统计中...</span></span>
+          <span class="footer-item">运行: <span id="running_time_mobile" class="footer-highlight">计算中...</span></span>
         </div>
 
         <!-- 版权信息和社交媒体水平布局 -->
@@ -121,23 +123,29 @@
             if (elMobile) elMobile.textContent = time;
           }
 
-          function loadVisitCounter() {
-            if (document.querySelector('script[src*="finicounter.eu.org"]')) {
-              return;
-            }
-            
+          function initBusuanziCounter() {
+            // 加载不蒜子统计脚本
             const script = document.createElement('script');
-            script.src = '//finicounter.eu.org/finicounter.js';
+            script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
             script.async = true;
+            script.onload = function() {
+              console.log('不蒜子统计系统已加载');
+            };
             script.onerror = function() {
-              if (!visitCountElements) {
-                visitCountElements = {
-                  desktop: document.getElementById("finicount_views"),
-                  mobile: document.getElementById("finicount_views_mobile")
-                };
-              }
-              if (visitCountElements.desktop) visitCountElements.desktop.textContent = '统计中...';
-              if (visitCountElements.mobile) visitCountElements.mobile.textContent = '统计中...';
+              console.warn('不蒜子统计脚本加载失败');
+              // 显示备用信息
+              const elements = [
+                'busuanzi_value_site_pv',
+                'busuanzi_value_site_uv', 
+                'busuanzi_value_page_pv'
+              ];
+              
+              elements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                  element.textContent = '统计异常';
+                }
+              });
             };
             document.head.appendChild(script);
           }
@@ -185,8 +193,7 @@
             
             updateTime();
             timeUpdateInterval = setInterval(updateTime, 1000);
-            loadVisitCounter();
-            setupVisitCountObserver();
+            initBusuanziCounter();
           }
 
           if (window.InstantNavigation) {

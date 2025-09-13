@@ -75,8 +75,8 @@
 
         <!-- 移动端简洁布局 -->
         <div class="footer-visit-count-mobile">
-          <span class="footer-item">访问：<span id="busuanzi_value_site_pv" class="footer-highlight">统计中...</span></span>
-          <span class="footer-item">访客：<span id="busuanzi_value_site_uv" class="footer-highlight">统计中...</span></span>
+          <span class="footer-item">访问：<span id="busuanzi_value_site_pv_mobile" class="footer-highlight">统计中...</span></span>
+          <span class="footer-item">访客：<span id="busuanzi_value_site_uv_mobile" class="footer-highlight">统计中...</span></span>
           <span class="footer-item">运行: <span id="running_time_mobile" class="footer-highlight">计算中...</span></span>
         </div>
 
@@ -129,30 +129,74 @@
               return;
             }
             
-            // 加载不蒜子统计脚本
+            // 加载不蒜子统计脚本，使用HTTPS协议
             const script = document.createElement('script');
-            script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+            script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
             script.async = true;
-            script.onload = function() {
-              console.log('不蒜子统计系统已加载');
-              // 延迟一下确保统计数据更新
-              setTimeout(() => {
-                const elements = document.querySelectorAll('[id^="busuanzi_value_"]');
+            
+            let retryCount = 0;
+            const maxRetries = 3;
+            
+            function syncMobileStats() {
+              // 同步桌面端数据到移动端
+              const sitePv = document.getElementById('busuanzi_value_site_pv');
+              const siteUv = document.getElementById('busuanzi_value_site_uv');
+              const sitePvMobile = document.getElementById('busuanzi_value_site_pv_mobile');
+              const siteUvMobile = document.getElementById('busuanzi_value_site_uv_mobile');
+              
+              if (sitePv && sitePvMobile) {
+                sitePvMobile.textContent = sitePv.textContent;
+              }
+              if (siteUv && siteUvMobile) {
+                siteUvMobile.textContent = siteUv.textContent;
+              }
+            }
+            
+            function checkBusuanziData() {
+              const elements = document.querySelectorAll('[id^="busuanzi_value_"]:not([id$="_mobile"])');
+              let allLoaded = true;
+              
+              elements.forEach(el => {
+                if (el.textContent === '统计中...' || el.textContent === '') {
+                  allLoaded = false;
+                }
+              });
+              
+              if (!allLoaded && retryCount < maxRetries) {
+                retryCount++;
+                console.log(`不蒜子统计数据未加载完成，重试第${retryCount}次...`);
+                setTimeout(checkBusuanziData, 2000);
+              } else if (!allLoaded) {
+                console.warn('不蒜子统计数据加载超时');
                 elements.forEach(el => {
-                  if (el.textContent === '统计中...') {
-                    // 如果还是显示统计中，可能需要手动触发更新
-                    console.log('等待不蒜子统计数据更新...');
+                  if (el.textContent === '统计中...' || el.textContent === '') {
+                    el.textContent = '加载超时';
                   }
                 });
-              }, 1000);
+                // 同步到移动端
+                syncMobileStats();
+              } else {
+                console.log('不蒜子统计数据加载完成');
+                // 同步到移动端
+                syncMobileStats();
+              }
+            }
+            
+            script.onload = function() {
+              console.log('不蒜子统计脚本已加载');
+              // 延迟检查统计数据是否更新
+              setTimeout(checkBusuanziData, 1500);
             };
+            
             script.onerror = function() {
               console.warn('不蒜子统计脚本加载失败');
               // 显示备用信息
               const elements = [
                 'busuanzi_value_site_pv',
                 'busuanzi_value_site_uv', 
-                'busuanzi_value_page_pv'
+                'busuanzi_value_page_pv',
+                'busuanzi_value_site_pv_mobile',
+                'busuanzi_value_site_uv_mobile'
               ];
               
               elements.forEach(id => {
@@ -162,6 +206,7 @@
                 }
               });
             };
+            
             document.head.appendChild(script);
           }
 

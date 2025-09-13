@@ -97,7 +97,6 @@ copyright: Copyright &copy; 2022~2025 fk # 左下角的版权声明
 # [Navigtion]
 nav:
   - 主页: 
-    - index.md
     - 随笔: 20250904.md
     - 测试: 20250904-1.md
   - 友情连接: link.md
@@ -134,24 +133,24 @@ extra:
       link: ""
       name: Email
 
-  analytics: 
-    provider: google
-    property: G-29HZMNR0KG  ##如果你 clone 了我的模板，请将这个修改为你的property
-    # !ENV GOOGLE_ANALYTICS_KEY
-    feedback:
-      title: 此页面有帮助吗？
-      ratings:
-        - icon: material/thumb-up-outline
-          name: This page was helpful
-          data: 1
-          note: >-
-            谢谢你的反馈！
-        - icon: material/thumb-down-outline
-          name: This page could be improved
-          data: 0
-          note: >- 
-            Thanks for your feedback! Help us improve this page by
-            using our <a href="https://marketingplatform.google.com/about/analytics/" target="_blank" rel="noopener">feedback form</a>.
+  # analytics: 
+  #   provider: google
+  #   property: G-29HZMNR0KG  ##如果你 clone 了我的模板，请将这个修改为你的property
+  #   # !ENV GOOGLE_ANALYTICS_KEY
+  #   feedback:
+  #     title: 此页面有帮助吗？
+  #     ratings:
+  #       - icon: material/thumb-up-outline
+  #         name: This page was helpful
+  #         data: 1
+  #         note: >-
+  #           谢谢你的反馈！
+  #       - icon: material/thumb-down-outline
+  #         name: This page could be improved
+  #         data: 0
+  #         note: >- 
+  #           Thanks for your feedback! Help us improve this page by
+  #           using our <a href="https://marketingplatform.google.com/about/analytics/" target="_blank" rel="noopener">feedback form</a>.
   # consent:
   #   title: Cookie consent
   #   description: >- 

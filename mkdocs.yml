@@ -262,10 +262,8 @@ markdown_extensions:
   
 extra_javascript:
   # 智谱清言翻译系统
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/javascripts/glm-config.js
   # - javascripts/glm-config.js
   # - javascripts/glm-translate.js
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/javascripts/glm-translate.js
   # - javascripts/translate-config.js
   # - javascripts/highlight-search.js
   # - docs/javascripts/translate.js

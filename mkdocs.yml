@@ -8,7 +8,8 @@ theme:
   name: material
   custom_dir: docs/overrides
   # font: false
-  logo: https://pica.zhimg.com/80/v2-74ecd899c7c4cc0258930eaff239a21b_1440w.webp
+  logo: assets/images/apple-logo.svg
+  # logo: https://pica.zhimg.com/80/v2-74ecd899c7c4cc0258930eaff239a21b_1440w.webp
   # https://s1.imagehub.cc/images/2025/01/05/64eafdf8c27f482c7ecb83003d460d6a.webp
   # https://s1.imagehub.cc/images/2024/02/02/91a767e93d1a344e44c69936464c583e.png
 
@@ -80,9 +81,13 @@ copyright: Copyright &copy; 2022~2025 fk # 左下角的版权声明
 nav:
   - 主页: 
     - index.md
-    - 随笔: 20250904.md
+  - 随笔: 
+    - 笔记: 20250904.md
     - 测试: 20250904-1.md
-  - 友情连接: link.md
+  - 博客:
+    - blog/index.md
+  - 友情连接: 
+    - 朋友: link.md
   - 关于:
     - 关于我: about/about.md
   - 留言板: msgboard.md

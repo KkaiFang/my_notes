@@ -39,8 +39,8 @@ hide_comment: true
     <div class="flip-glow-ultimate">
       <div class="flip-glow-ultimate-glow"></div>
       <div class="flip-glow-ultimate-imgs">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" alt="Back Image" class="flip-glow-ultimate-back" loading="eager" fetchpriority="high" width="280" height="280">
-        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" alt="Front Image" class="flip-glow-ultimate-front" loading="lazy" width="280" height="280">
+        <img src="assets/images/apple-book-back.svg" alt="Back Image" class="flip-glow-ultimate-back" loading="eager" fetchpriority="high" width="280" height="280">
+        <img src="assets/images/apple-book-front.svg" alt="Front Image" class="flip-glow-ultimate-front" loading="lazy" width="280" height="280">
       </div>
     </div>
   </div>

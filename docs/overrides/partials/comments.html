@@ -27,7 +27,7 @@
     if (palette && typeof palette.color === "object") {
       var theme = palette.color.scheme === "slate"
         ? "transparent_dark"
-        : "light"
+        : "noborder_light"
 
       // Instruct Giscus to set theme
       giscus.setAttribute("data-theme", theme) 
@@ -41,14 +41,16 @@
         if (palette && typeof palette.color === "object") {
           var theme = palette.color.scheme === "slate"
             ? "transparent_dark"
-            : "light"
+            : "noborder_light"
 
           // Instruct Giscus to change theme
           var frame = document.querySelector(".giscus-frame")
-          frame.contentWindow.postMessage(
-            { giscus: { setConfig: { theme } } },
-            "https://giscus.app"
-          )
+          if (frame) {
+            frame.contentWindow.postMessage(
+              { giscus: { setConfig: { theme } } },
+              "https://giscus.app"
+            )
+          }
         }
       })
     })

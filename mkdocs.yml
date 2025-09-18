@@ -1,24 +1,6 @@
 site_name: fk的博客
 site_author: fk
 site_description: 这是我的个人博客
-nav:
-  - 首页: index.md
-  - 博客:
-    - 技术文章:
-      - 随笔: 20250904.md
-      - 测试: 20250904-1.md
-    - 学习笔记:
-      - 待添加: index.md
-    - 项目分享:
-      - 待添加: index.md
-  - 工具:
-    - 实用链接: link.md
-    - 在线工具:
-      - 待添加: index.md
-  - 关于:
-    - 关于我: about.md
-    - 联系方式:
-      - 待添加: index.md
 
 
 site_url: https://KkaiFang.github.io/my_notes/
@@ -97,12 +79,13 @@ copyright: Copyright &copy; 2022~2025 fk # 左下角的版权声明
 # [Navigtion]
 nav:
   - 主页: 
+    - index.md
     - 随笔: 20250904.md
     - 测试: 20250904-1.md
   - 友情连接: link.md
   - 关于:
-    - 关于我: about.md
-
+    - 关于我: about/about.md
+  - 留言板: msgboard.md
  
 
 
@@ -126,11 +109,11 @@ extra:
     - icon: fontawesome/brands/bilibili
       link: ""
       name: Bilibili
-    - icon: fontawesome/solid/file-code
+    - icon: fontawesome/solid/blog          
       link: https://www.cnblogs.com/codedingzhen
-      name: CNblog    
+      name: 博客园    
     - icon: fontawesome/regular/envelope
-      link: ""
+      link: mailto:2045907353@qq.com
       name: Email
 
   # analytics: 
@@ -184,20 +167,20 @@ plugins:
   #       - waline.md
   #       - link.md
   #       - blog/Mkdocs/linktech.md
-  # - blog:
-  #     post_date_format: full #时间
-  #     draft: true
-  #     draft_if_future_date: true #自动将具有未来日期的帖子标记为草稿
-  #     post_readtime: true
-  #     post_readtime_words_per_minute: 265  #计算帖子的阅读时间时读者每分钟预计阅读的字数
-  #     post_url_format: "{date}/{slug}"
-  #     # categories_slugify: !!python/object/apply:pymdownx.slugs.slugify
-  #     #   kwds:
-  #     #     case: lower
-  #     # categories_toc: true
-  #     pagination_per_page: 5
-  #     pagination_url_format: "page/{page}"
-  #     # authors_file: "{blog}/.authors.yml"  #作者信息
+  - blog:
+      post_date_format: full #时间
+      draft: true
+      draft_if_future_date: true #自动将具有未来日期的帖子标记为草稿
+      post_readtime: true
+      post_readtime_words_per_minute: 265  #计算帖子的阅读时间时读者每分钟预计阅读的字数
+      post_url_format: "{date}/{slug}"
+      # categories_slugify: !!python/object/apply:pymdownx.slugs.slugify
+      #   kwds:
+      #     case: lower
+      # categories_toc: true
+      pagination_per_page: 5
+      pagination_url_format: "page/{page}"
+      # authors_file: "{blog}/.authors.yml"  #作者信息
   - tags
   - document-dates:
       position: bottom            # Display position: top (after title)  bottom (end of document), default: bottom

@@ -1,21 +1,24 @@
 {% if page.meta.comments %}
   <h2 id="__comments">{{ lang.t("meta.comments") }}</h2>
+  <!-- 评论系统加载提示 -->
+  <div id="comment-loading" style="text-align: center; padding: 2rem; color: #666;">
+    <p>评论系统加载中...</p>
+  </div>
   <!-- Insert generated snippet here -->
-  <script src="https://giscus.app/client.js"
-  data-repo="Wcowin/hexo-site-comments"
-  data-repo-id="R_kgDOIl9OJA"
-  data-category="Announcements"
-  data-category-id="DIC_kwDOIl9OJM4CTHDe"
-  data-mapping="pathname"
-  data-strict="0"
-  data-reactions-enabled="1"
-  data-emit-metadata="0"
-  data-input-position="top"
-  data-theme="noborder_light"
-  data-lang="zh-CN"
-  data-loading="lazy"  
-  crossorigin="anonymous"
-  async>
+<script src="https://giscus.app/client.js"
+        data-repo="KkaiFang/my_notes"
+        data-repo-id="R_kgDOPpzuUQ"
+        data-category="General"
+        data-category-id="DIC_kwDOPpzuUc4CvmJw"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
 </script>
 
   <!-- Synchronize Giscus theme with palette -->
@@ -27,11 +30,29 @@
     if (palette && typeof palette.color === "object") {
       var theme = palette.color.scheme === "slate"
         ? "transparent_dark"
-        : "noborder_light"
+        : "light"
 
       // Instruct Giscus to set theme
       giscus.setAttribute("data-theme", theme) 
     }
+
+    // 隐藏加载提示并确保评论系统可见
+    function showComments() {
+      var loadingEl = document.getElementById('comment-loading');
+      if (loadingEl) {
+        loadingEl.style.display = 'none';
+      }
+    }
+
+    // 监听Giscus加载完成
+    window.addEventListener('message', function(event) {
+      if (event.origin === 'https://giscus.app' && event.data.giscus) {
+        showComments();
+      }
+    });
+
+    // 备用：如果Giscus在3秒内没有加载完成，也显示评论区域
+    setTimeout(showComments, 3000);
 
     // Register event handlers after documented loaded
     document.addEventListener("DOMContentLoaded", function() {
@@ -41,11 +62,11 @@
         if (palette && typeof palette.color === "object") {
           var theme = palette.color.scheme === "slate"
             ? "transparent_dark"
-            : "noborder_light"
+            : "light"
 
           // Instruct Giscus to change theme
           var frame = document.querySelector(".giscus-frame")
-          if (frame) {
+          if (frame && frame.contentWindow) {
             frame.contentWindow.postMessage(
               { giscus: { setConfig: { theme } } },
               "https://giscus.app"

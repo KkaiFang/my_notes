@@ -7,7 +7,7 @@ from textwrap import dedent
 import re
 
 # 配置：需要添加评论的目录
-COMMENT_DIRECTORIES = ['blog/', 'develop/','trip/','relax/']
+COMMENT_DIRECTORIES = ['blog/', 'develop/','trip/','stock/']
 
 # 配置：排除评论的页面列表
 EXCLUDED_PAGES = {

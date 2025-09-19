@@ -8,8 +8,8 @@ theme:
   name: material
   custom_dir: docs/overrides
   # font: false
-  logo: assets/images/apple-logo.svg
-  # logo: https://pica.zhimg.com/80/v2-74ecd899c7c4cc0258930eaff239a21b_1440w.webp
+  # logo: assets/images/apple-logo.svg
+  logo: https://pica.zhimg.com/80/v2-74ecd899c7c4cc0258930eaff239a21b_1440w.webp
   # https://s1.imagehub.cc/images/2025/01/05/64eafdf8c27f482c7ecb83003d460d6a.webp
   # https://s1.imagehub.cc/images/2024/02/02/91a767e93d1a344e44c69936464c583e.png
 
@@ -64,6 +64,7 @@ theme:
     # - content.action.edit # 编辑按钮
     # - content.action.view # 查看源码按钮
     - content.code.annotate # 代码注释
+  
   language: zh # 一些提示性的文字会变成中文
   icon:
     repo: fontawesome/brands/github #右上角图标
@@ -79,17 +80,72 @@ copyright: Copyright &copy; 2022~2025 fk # 左下角的版权声明
 
 # [Navigtion]
 nav:
-  - 主页: 
-    - index.md
+  # - 主页: index.md
+  
   - 随笔: 
     - 笔记: 20250904.md
     - 测试: 20250904-1.md
+  
+  - 开发:
+    - develop/index.md  # 开发首页
+    -  proxmox虚拟机模板制作: develop/proxmox.md
+    - 前端开发:
+      - 前端首页: develop/frontend/index.md
+      - JavaScript: develop/frontend/js.md
+      - CSS: develop/frontend/css.md
+    - 后端开发:
+      - 后端首页: develop/backend/index.md
+      - Python: develop/backend/python.md
+      - 数据库: develop/backend/database.md
+  
   - 博客:
-    - blog/index.md
+    - 博客首页: blog/index.md
+    - 文章:
+      - 测试评论功能: blog/posts/test1.md
+      - 评论测试: blog/posts/test-comment.md
+    # 可以添加分类
+    # - 技术文章:
+    #   - Web开发: blog/tech/web.md
+    #   - 工具使用: blog/tech/tools.md
+    # - 生活随笔:
+    #   - 旅行: blog/life/travel.md
+    #   - 学习: blog/life/learning.md
+  
+  - 笔记:
+    # 可以创建多级分类
+    # - 技术笔记:
+    #   - 编程语言: notes/programming/index.md
+    #   - 框架学习: notes/frameworks/index.md
+    # - 学习笔记:
+    #   - 课程笔记: notes/courses/index.md
+    #   - 读书笔记: notes/books/index.md
+    - 笔记首页: notes/index.md  # 先创建一个首页
+  
+  - 旅行:
+    - 旅行首页: trip/index.md  # 先创建一个首页
+    # - 国内游:
+    #   - 北京: trip/domestic/beijing.md
+    #   - 上海: trip/domestic/shanghai.md
+    # - 国外游:
+    #   - 日本: trip/international/japan.md
+    #   - 泰国: trip/international/thailand.md
+  
+  - 股票:
+    - 股票首页: stock/index.md  # 先创建一个首页
+    # - 投资笔记:
+    #   - 技术分析: stock/analysis/technical.md
+    #   - 基本面分析: stock/analysis/fundamental.md
+    # - 交易记录:
+    #   - 2024年: stock/records/2024.md
+    #   - 2025年: stock/records/2025.md
+  
   - 友情连接: 
     - 朋友: link.md
+  
   - 关于:
     - 关于我: about/about.md
+    - 个人经历: about/个人经历.md
+  
   - 留言板: msgboard.md
  
 
@@ -176,7 +232,7 @@ plugins:
       post_date_format: full #时间
       draft: true
       draft_if_future_date: true #自动将具有未来日期的帖子标记为草稿
-      post_readtime: true
+      # post_readtime: true
       post_readtime_words_per_minute: 265  #计算帖子的阅读时间时读者每分钟预计阅读的字数
       post_url_format: "{date}/{slug}"
       # categories_slugify: !!python/object/apply:pymdownx.slugs.slugify
@@ -194,8 +250,10 @@ plugins:
       date_format: '%Y-%m-%d'  # Date format strings, e.g., %Y-%m-%d, %b %d, %Y, etc
       time_format: '%H:%M:%S'  # Time format strings (valid only if type=datetime)
       exclude:                 # List of excluded files
-        - index.md
-        - about.md         # Exclude all files in private directory, including subdirectories
+        # - index.md
+        - blog/posts/*
+        # - blog/index.md
+        # - about.md         # Exclude all files in private directory, including subdirectories
       show_author: true       # Show author or not, default:java true
  
 
@@ -299,7 +357,7 @@ extra_css:
   - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/ziti.css #字体
   # - https://fontsapi.zeoseven.com/292/main/result.css
   # - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/ziti.css?display=swap
-  # - https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkai/dist/LXGWWenKai-Bold/result.css
+  # - https://chinese-fonts-cdn.deno.COMMENT_DIRECTORIES = ['blog/', 'develop/','trip/','relax/']/packages/lxgwwenkai/dist/LXGWWenKai-Bold/result.css
   # - https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css # font-awesome表情支持
   # - stylesheets/timeline.css
   # - stylesheets/LiquidGlass.css

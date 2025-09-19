@@ -7,7 +7,7 @@ from textwrap import dedent
 import re
 
 # 配置：需要添加评论的目录
-COMMENT_DIRECTORIES = ['blog/', 'develop/','trip/','relax/']
+COMMENT_DIRECTORIES = ['blog/', 'develop/','trip/','stock/']
 
 # 配置：排除评论的页面列表
 EXCLUDED_PAGES = {
@@ -20,7 +20,7 @@ EXCLUDED_PAGES = {
 EXCLUDED_PATTERNS = [
     r'.*\/index\.md$',  # 排除所有 index.md 文件
     r'.*\/archive\.md$',  # 排除所有 archive.md 文件
-    r'^blog/posts/.*',  # 排除所有 blog/posts 目录下的所有内容
+    # r'^blog/posts/.*',  # 排除所有 blog/posts 目录下的所有内容
     r'^blog/archive/.*',  # 排除所有 blog/archive 目录下的所有内容
     r'^blog/category/.*',  # 排除所有 blog/category 目录下的所有内容（包括子目录和文件）
 ]
@@ -87,9 +87,28 @@ def on_page_markdown(markdown, **kwargs):
         max-width: 100%;
     }
     
+    /* 白天模式样式 */
+    [data-md-color-scheme="default"] .twikoo-container {
+        border-top-color: rgba(0,0,0,0.1);
+    }
+    
+    [data-md-color-scheme="default"] .twikoo-container h3 {
+        color: #1f2937;
+    }
+    
+    [data-md-color-scheme="default"] #tcomment.loading {
+        background: rgba(0,0,0,0.02);
+        border-radius: 8px;
+        color: #6b7280;
+    }
+    
     /* 暗色模式适配 */
     [data-md-color-scheme="slate"] .twikoo-container {
         border-top-color: rgba(255,255,255,0.1);
+    }
+    
+    [data-md-color-scheme="slate"] .twikoo-container h3 {
+        color: #f3f4f6;
     }
     
     /* 加载状态样式 */
@@ -103,6 +122,28 @@ def on_page_markdown(markdown, **kwargs):
     
     [data-md-color-scheme="slate"] #tcomment.loading {
         background: rgba(255,255,255,0.05);
+        color: #d1d5db;
+    }
+    
+    /* Twikoo 评论框白天模式样式 */
+    [data-md-color-scheme="default"] .tk-comments-container .tk-comment {
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+    }
+    
+    [data-md-color-scheme="default"] .tk-comments-container .tk-input {
+        background-color: #ffffff;
+        border: 1px solid #d1d5db;
+        color: #374151;
+    }
+    
+    [data-md-color-scheme="default"] .tk-comments-container .tk-submit {
+        background-color: #3b82f6;
+        color: #ffffff;
+    }
+    
+    [data-md-color-scheme="default"] .tk-comments-container .tk-submit:hover {
+        background-color: #2563eb;
     }
     </style>
     

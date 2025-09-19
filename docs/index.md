@@ -1,7 +1,7 @@
 ---
 title: 欢迎来到我的博客 
 hide:
-  - navigation # 显示右
+#   - navigation # 显示右
 #   - toc #显示左
   - footer
   - feedback

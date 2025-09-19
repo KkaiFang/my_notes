@@ -1,0 +1,570 @@
+<!-- Footer -->
+<footer class="md-footer">
+  <!-- Link to previous and/or next page -->
+  {% if "navigation.footer" in features %} {% if page.previous_page or
+  page.next_page %} {% if page.meta and page.meta.hide %} {% set hidden =
+  "hidden" if "footer" in page.meta.hide %} {% endif %}
+  <nav
+    class="md-footer__inner md-grid"
+    aria-label="{{ lang.t('footer') }}"
+    {{ hidden }}
+  >
+    <!-- Link to previous page -->
+    {% if page.previous_page %} {% set direction = lang.t("footer.previous") %}
+    <a
+      href="{{ page.previous_page.url | url }}"
+      class="md-footer__link md-footer__link--prev"
+      aria-label="{{ direction }}: {{ page.previous_page.title | e }}"
+    >
+      <div class="md-footer__button md-icon">
+        {% set icon = config.theme.icon.previous or "material/arrow-left" %} {%
+        include ".icons/" ~ icon ~ ".svg" %}
+      </div>
+      <div class="md-footer__title">
+        <span class="md-footer__direction"> {{ direction }} </span>
+        <div class="md-ellipsis">{{ page.previous_page.title }}</div>
+      </div>
+    </a>
+    {% endif %}
+
+    <!-- Link to next page -->
+    {% if page.next_page %} {% set direction = lang.t("footer.next") %}
+    <a
+      href="{{ page.next_page.url | url }}"
+      class="md-footer__link md-footer__link--next"
+      aria-label="{{ direction }}: {{ page.next_page.title | e }}"
+    >
+      <div class="md-footer__title">
+        <span class="md-footer__direction"> {{ direction }} </span>
+        <div class="md-ellipsis">{{ page.next_page.title }}</div>
+      </div>
+      <div class="md-footer__button md-icon">
+        {% set icon = config.theme.icon.next or "material/arrow-right" %} {%
+        include ".icons/" ~ icon ~ ".svg" %}
+      </div>
+    </a>
+    {% endif %}
+  </nav>
+  {% endif %} {% endif %}
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="footer-wrapper">
+        <!-- 访问统计区域 -->
+        <div class="footer-content">
+          <div class="footer-visit-count">
+            <div class="footer-item">
+              <span>本站总访问量：</span>
+              <span id="busuanzi_value_site_pv" class="footer-highlight">统计中...</span>
+            </div>
+            <div class="footer-item">
+              <span>访客数：</span>
+              <span id="busuanzi_value_site_uv" class="footer-highlight">统计中...</span>
+            </div>
+            <div class="footer-item">
+              <span>本页阅读量：</span>
+              <span id="busuanzi_value_page_pv" class="footer-highlight">统计中...</span>
+            </div>
+            <div class="footer-item runtime-info">
+              <span>本站已经运行</span>
+              <span id="running_time" class="footer-highlight">计算中...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 移动端简洁布局 -->
+        <div class="footer-visit-count-mobile">
+          <span class="footer-item">访问：<span id="busuanzi_value_site_pv_mobile" class="footer-highlight">统计中...</span></span>
+          <span class="footer-item">访客：<span id="busuanzi_value_site_uv_mobile" class="footer-highlight">统计中...</span></span>
+          <span class="footer-item">运行: <span id="running_time_mobile" class="footer-highlight">计算中...</span></span>
+        </div>
+
+        <!-- 版权信息和社交媒体水平布局 -->
+        <div class="footer-bottom-section">
+          <div class="md-footer-copyright">
+            <p>Copyright © 2022-2025 fk</p>
+            <p>Made with <a href="https://squidfunk.github.io/mkdocs-material/" class="mkdocs-link">Material for MkDocs</a></p>
+          </div>
+
+          {% if config.extra.social %}
+            <div class="footer-social">
+              {% include "partials/social.html" %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- 页脚脚本部分 -->
+      <script>
+        (function() {
+          let timeUpdateInterval;
+          let visitCountElements;
+          
+          function timingTime() {
+            const start = "2025-09-12T00:00:00";
+            const startTime = new Date(start).getTime();
+            const now = Date.now();
+            let diff = Math.floor((now - startTime) / 1000);
+            const days = Math.floor(diff / 86400);
+            diff %= 86400;
+            const hours = Math.floor(diff / 3600);
+            diff %= 3600;
+            const minutes = Math.floor(diff / 60);
+            const seconds = diff % 60;
+            return `${days}天${hours}时${minutes}分${seconds}秒`;
+          }
+
+          function updateTime() {
+            const time = timingTime();
+            const el = document.getElementById("running_time");
+            const elMobile = document.getElementById("running_time_mobile");
+            if (el) el.textContent = time;
+            if (elMobile) elMobile.textContent = time;
+          }
+
+          function initBusuanziCounter() {
+            // 检查是否已经加载过不蒜子脚本
+            if (document.querySelector('script[src*="busuanzi"]')) {
+              return;
+            }
+            
+            // 加载不蒜子统计脚本，使用HTTPS协议
+            const script = document.createElement('script');
+            script.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+            script.async = true;
+            
+            let retryCount = 0;
+            const maxRetries = 3;
+            
+            function syncMobileStats() {
+              // 同步桌面端数据到移动端
+              const sitePv = document.getElementById('busuanzi_value_site_pv');
+              const siteUv = document.getElementById('busuanzi_value_site_uv');
+              const sitePvMobile = document.getElementById('busuanzi_value_site_pv_mobile');
+              const siteUvMobile = document.getElementById('busuanzi_value_site_uv_mobile');
+              
+              if (sitePv && sitePvMobile) {
+                sitePvMobile.textContent = sitePv.textContent;
+              }
+              if (siteUv && siteUvMobile) {
+                siteUvMobile.textContent = siteUv.textContent;
+              }
+            }
+            
+            function checkBusuanziData() {
+              const elements = document.querySelectorAll('[id^="busuanzi_value_"]:not([id$="_mobile"])');
+              let allLoaded = true;
+              
+              elements.forEach(el => {
+                if (el.textContent === '统计中...' || el.textContent === '') {
+                  allLoaded = false;
+                }
+              });
+              
+              if (!allLoaded && retryCount < maxRetries) {
+                retryCount++;
+                console.log(`不蒜子统计数据未加载完成，重试第${retryCount}次...`);
+                setTimeout(checkBusuanziData, 2000);
+              } else if (!allLoaded) {
+                console.warn('不蒜子统计数据加载超时');
+                elements.forEach(el => {
+                  if (el.textContent === '统计中...' || el.textContent === '') {
+                    el.textContent = '加载超时';
+                  }
+                });
+                // 同步到移动端
+                syncMobileStats();
+              } else {
+                console.log('不蒜子统计数据加载完成');
+                // 同步到移动端
+                syncMobileStats();
+              }
+            }
+            
+            script.onload = function() {
+              console.log('不蒜子统计脚本已加载');
+              // 延迟检查统计数据是否更新
+              setTimeout(checkBusuanziData, 1500);
+            };
+            
+            script.onerror = function() {
+              console.warn('不蒜子统计脚本加载失败');
+              // 显示备用信息
+              const elements = [
+                'busuanzi_value_site_pv',
+                'busuanzi_value_site_uv', 
+                'busuanzi_value_page_pv',
+                'busuanzi_value_site_pv_mobile',
+                'busuanzi_value_site_uv_mobile'
+              ];
+              
+              elements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                  element.textContent = '统计异常';
+                }
+              });
+            };
+            
+            document.head.appendChild(script);
+          }
+
+
+
+          function cleanup() {
+            if (timeUpdateInterval) {
+              clearInterval(timeUpdateInterval);
+              timeUpdateInterval = null;
+            }
+          }
+
+          function init() {
+            cleanup();
+            
+            updateTime();
+            timeUpdateInterval = setInterval(updateTime, 1000);
+            
+            // 延迟加载不蒜子统计，确保DOM完全准备好
+            setTimeout(() => {
+              initBusuanziCounter();
+            }, 100);
+          }
+
+          if (window.InstantNavigation) {
+            window.InstantNavigation.register(init, 'footer-functions');
+          } else {
+            if (typeof window.document$ !== 'undefined' && !window.document$.isStopped) {
+              window.document$.subscribe(() => {
+                setTimeout(init, 100);
+              });
+            } else {
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+              } else {
+                init();
+              }
+            }
+          }
+
+          window.addEventListener('beforeunload', cleanup);
+          document.addEventListener('footer.reinit', init);
+        })();
+      </script>
+
+      <style>
+        /* 页脚背景配色 */
+        .md-footer {
+          background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        .md-footer-meta {
+          background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        /* 整体页脚容器 */
+        .footer-wrapper {
+          width: 100%;
+          padding: 0.2rem 0;
+          text-align: center;
+        }
+
+        /* 版权信息和社交媒体水平布局 */
+        .footer-bottom-section {
+          max-width: 900px;
+          margin: 0.4rem auto 0;
+          padding: 0.4rem 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.15);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        /* 版权信息 */
+        .md-footer-copyright {
+          text-align: left;
+          font-size: 0.75rem;
+          opacity: 0.8;
+          line-height: 1.2;
+        }
+
+        /* 社交媒体图标 */
+        .footer-social {
+          display: flex;
+          gap: 0.3rem;
+          align-items: center;
+        }
+
+        /* Safari兼容性修复 */
+        .footer-social .md-social__link svg {
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          opacity: 1 !important;
+          visibility: visible !important;
+          pointer-events: auto;
+        }
+
+        .footer-social .md-social__link {
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+        
+        /* 内容区域样式 */
+        .footer-content {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 0.4rem 0 0;
+        }
+
+        .footer-visit-count {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.3rem;
+          font-size: 0.75rem;
+          color: var(--md-footer-fg-color--light);
+          overflow-x: auto;
+        }
+
+        .footer-item {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.4rem 0.8rem;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+          min-width: 160px;
+          font-size: 0.8rem;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+        }
+
+        .footer-item:hover {
+          background: rgba(255, 255, 255, 0.15);
+          border-color: rgba(81, 143, 193, 0.4);
+          transform: translateY(-1px);
+        }
+        
+        .footer-highlight {
+          color: #C2C4C9;
+          font-weight: 600;
+          margin-left: 0;
+        }
+
+
+        
+        /* 社交媒体图标样式 - 仅桌面端 */
+        @media (min-width: 76.1875em) {
+          .footer-social .md-social__link {
+            padding: 0.3rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 2rem;
+            height: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+          }
+
+          .footer-social .md-social__link svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            fill: currentColor;
+            flex-shrink: 0;
+          }
+
+          .footer-social .md-social__link:hover {
+            background: rgba(81, 143, 193, 0.2);
+            border-color: rgba(81, 143, 193, 0.4);
+          }
+        }
+
+        /* 移动端社交媒体图标样式 */
+        @media (max-width: 76.1875em) {
+          .footer-social .md-social__link {
+            padding: 0.4rem;
+            background: transparent;
+            border: none;
+            width: auto;
+            height: auto;
+            display: inline-block;
+            border-radius: 0;
+            transition: color 0.2s ease;
+            box-sizing: border-box;
+          }
+
+          .footer-social .md-social__link:hover {
+            background: transparent;
+            border: none;
+            color: var(--md-accent-fg-color);
+          }
+
+          .footer-social .md-social__link svg {
+            width: 1.6rem;
+            height: 1.6rem;
+            fill: currentColor;
+            flex-shrink: 0;
+            display: block;
+          }
+        }
+        
+        /* 导航链接样式 */
+        .md-footer__link {
+          transition: opacity 0.2s ease;
+        }
+        
+        .md-footer__link:hover {
+          opacity: 1;
+        }
+
+        /* 移动端响应式 */
+        @media (max-width: 76.1875em) {
+          .footer-visit-count {
+            display: none;
+          }
+
+          .footer-bottom-section {
+            flex-direction: column;
+            gap: 0.6rem;
+            text-align: center;
+          }
+
+          .md-footer-copyright {
+            text-align: center;
+            font-size: 0.75rem;
+          }
+
+          .footer-social .md-social__link {
+            width: 1.8rem;
+            height: 1.8rem;
+          }
+
+          .footer-visit-count-mobile {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.4em 0.8em;
+            padding: 0.2em 0;
+            font-size: 0.75rem;
+            color: var(--md-footer-fg-color--light);
+            text-align: center;
+          }
+
+          .footer-visit-count-mobile > * {
+            white-space: nowrap;
+          }
+
+
+
+          .footer-visit-count-mobile .footer-highlight {
+            margin-left: 0;
+          }
+        }
+
+        /* 桌面端隐藏移动端布局 */
+        @media (min-width: 76.1875em) {
+          .footer-visit-count-mobile {
+            display: none;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .footer-visit-count {
+            flex-direction: row;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: nowrap;
+          }
+        }
+
+        /* 白天模式适配 */
+        [data-md-color-scheme="default"] .md-footer {
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          color: #059669;
+        }
+
+        [data-md-color-scheme="default"] .md-footer-meta {
+          background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+          color: #059669;
+        }
+
+        [data-md-color-scheme="default"] .footer-item {
+          background: rgba(5, 150, 105, 0.1);
+          border-color: rgba(5, 150, 105, 0.2);
+          color: #047857;
+          font-weight: 600;
+        }
+
+        [data-md-color-scheme="default"] .footer-item:hover {
+          background: rgba(5, 150, 105, 0.15);
+          border-color: rgba(5, 150, 105, 0.4);
+          transform: translateY(-1px);
+        }
+
+        [data-md-color-scheme="default"] .footer-social .md-social__link {
+          background: rgba(5, 150, 105, 0.1);
+          border-color: rgba(5, 150, 105, 0.2);
+          color: #047857;
+        }
+
+        [data-md-color-scheme="default"] .footer-social .md-social__link:hover {
+          background: rgba(5, 150, 105, 0.2);
+          border-color: rgba(5, 150, 105, 0.4);
+          color: #059669;
+        }
+
+        [data-md-color-scheme="default"] .footer-highlight {
+          color: #065f46;
+          font-weight: 800;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-md-color-scheme="default"] .footer-visit-count {
+          color: #047857;
+          font-weight: 600;
+        }
+
+        [data-md-color-scheme="default"] .footer-visit-count-mobile {
+          color: #047857;
+          font-weight: 600;
+        }
+
+        [data-md-color-scheme="default"] .md-footer-copyright {
+          color: #059669 !important;
+          font-weight: 600;
+        }
+
+        /* 深色模式适配 */
+        [data-md-color-scheme="slate"] .md-footer {
+          background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        [data-md-color-scheme="slate"] .md-footer-meta {
+          background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+        }
+
+        [data-md-color-scheme="slate"] .footer-item {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        [data-md-color-scheme="slate"] .footer-item:hover {
+          background: rgba(255, 255, 255, 0.12);
+          border-color: rgba(81, 143, 193, 0.3);
+        }
+
+        [data-md-color-scheme="slate"] .footer-social .md-social__link {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.12);
+        }
+      </style>
+    </div>
+  </div>
+</footer>

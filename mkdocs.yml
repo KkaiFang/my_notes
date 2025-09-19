@@ -73,7 +73,7 @@ theme:
     alternate: fontawesome/solid/language
   
 edit_uri: edit/main/docs # 编辑按钮跳转的链接 
-repo_url: https://KkaiFang.github.io/my_notes/ # 右上角点击跳转的链接
+repo_url: https://github.com/KkaiFang/my_notes # 右上角点击跳转的链接
 repo_name: my_notes # 右上角的名字
 
 copyright: Copyright &copy; 2022~2025 fk # 左下角的版权声明

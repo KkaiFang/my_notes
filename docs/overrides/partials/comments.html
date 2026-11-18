@@ -4,8 +4,18 @@
   <div id="comment-loading" style="text-align: center; padding: 2rem; color: #666;">
     <p>评论系统加载中...</p>
   </div>
-  <!-- Insert generated snippet here -->
-<script src="https://giscus.app/client.js"
+
+  {#-
+    Giscus 的 client.js 执行时用 document.currentScript 读配置，并立即在脚本后面插入
+    iframe；它不会「记住」配置，页面切走后也不会自己重新渲染。
+
+    站点开启了 navigation.instant（无刷新切页），切页后内联 <script> 不会重新执行，
+    所以这里只输出配置占位（不带 src），由 javascripts/comments.js 在首次加载和每次
+    切页后为当前页面插入一次 client.js——既不会重复渲染，也不会切页后消失。
+  -#}
+  <script
+        type="application/json"
+        data-giscus-placeholder
         data-repo="KkaiFang/my_notes"
         data-repo-id="R_kgDOPpzuUQ"
         data-category="General"
@@ -17,63 +27,6 @@
         data-input-position="bottom"
         data-theme="preferred_color_scheme"
         data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>
-
-  <!-- Synchronize Giscus theme with palette -->
-  <script>
-    var giscus = document.querySelector("script[src*=giscus]")
-
-    // Set palette on initial load
-    var palette = __md_get("__palette")
-    if (palette && typeof palette.color === "object") {
-      var theme = palette.color.scheme === "slate"
-        ? "transparent_dark"
-        : "light"
-
-      // Instruct Giscus to set theme
-      giscus.setAttribute("data-theme", theme) 
-    }
-
-    // 隐藏加载提示并确保评论系统可见
-    function showComments() {
-      var loadingEl = document.getElementById('comment-loading');
-      if (loadingEl) {
-        loadingEl.style.display = 'none';
-      }
-    }
-
-    // 监听Giscus加载完成
-    window.addEventListener('message', function(event) {
-      if (event.origin === 'https://giscus.app' && event.data.giscus) {
-        showComments();
-      }
-    });
-
-    // 备用：如果Giscus在3秒内没有加载完成，也显示评论区域
-    setTimeout(showComments, 3000);
-
-    // Register event handlers after documented loaded
-    document.addEventListener("DOMContentLoaded", function() {
-      var ref = document.querySelector("[data-md-component=palette]")
-      ref.addEventListener("change", function() {
-        var palette = __md_get("__palette")
-        if (palette && typeof palette.color === "object") {
-          var theme = palette.color.scheme === "slate"
-            ? "transparent_dark"
-            : "light"
-
-          // Instruct Giscus to change theme
-          var frame = document.querySelector(".giscus-frame")
-          if (frame && frame.contentWindow) {
-            frame.contentWindow.postMessage(
-              { giscus: { setConfig: { theme } } },
-              "https://giscus.app"
-            )
-          }
-        }
-      })
-    })
+        crossorigin="anonymous">
   </script>
 {% endif %}

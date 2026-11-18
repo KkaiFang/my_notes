@@ -246,6 +246,7 @@ extra_javascript:
   # 全部改用仓库内本地文件：不再依赖 Wcowin/Wcowin.github.io 这个上游仓库，
   # 减少跨域请求和首屏阻塞（原来 view.js 在 CDN 上已 404，每次访问都白等一次）
   - javascripts/unified-instant-handler.js  # 供 footer.html 的 InstantNavigation.register 使用
+  - javascripts/comments.js                 # Giscus 评论区：页面切换后重新渲染 + 主题同步
   - javascripts/extra.js                    # 错误处理、兼容性修复、性能优化
   # MathJax 配置必须排在主库之前加载
   - javascripts/mathjax.js
@@ -282,6 +283,6 @@ hooks:
   - docs/overrides/hooks/auto_nav_title.py  # 给自动导航的页面补标题（取正文 H1）
   - docs/overrides/hooks/reading_time.py    # 正文顶部插入阅读时长提示
   - docs/overrides/hooks/related_posts.py   # 底部相关文章推荐
-  - docs/overrides/hooks/comments.py        # 自动注入 Twikoo 评论
+  - docs/overrides/hooks/comments.py        # 决定哪些页面开启评论（渲染由 Giscus 模板负责）
   # 其余 hook 未启用：
   #   socialmedia.py / toc_optimizer.py / last_updated.py / reading_progress.py

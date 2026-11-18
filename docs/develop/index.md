@@ -4,20 +4,17 @@
 
 ## 前端开发
 
-- [前端开发文档](./frontend/) - HTML/CSS/JavaScript 等前端技术
+- [前端开发文档](frontend/index.md) - HTML/CSS/JavaScript 等前端技术
 
 ## 后端开发  
 
-- [后端开发文档](./backend/) - Python/数据库等后端技术
+- [后端开发文档](backend/index.md) - Python/数据库等后端技术
 
 ## 其他
 
-- [Proxmox虚拟机模板制作](./proxmox.md) - 虚拟化技术
-
-
-## vps选型
-
-- [vps选型测试](./vps选型和测试.md)
+- [Proxmox虚拟机模板制作](proxmox.md) - 虚拟化技术
+- [VPS选型和测试](vps选型和测试.md) - 服务器选型与性能测试
+- [Trojan终极docker-compose版本](trojan终极docker-compose版本.md) - 搭建记录
 
 ---
 

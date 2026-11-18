@@ -1,0 +1,6 @@
+# 站点依赖（CI 与本地共用，保证构建结果一致）
+mkdocs==1.6.1
+mkdocs-material==9.8.1
+mkdocs-document-dates==3.8.9
+mkdocs-awesome-pages-plugin==2.10.1
+pymdown-extensions

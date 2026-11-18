@@ -40,9 +40,6 @@ theme:
     - announce.dismiss # 可关闭公告栏
     - navigation.instant # 页面无刷新切换
     - navigation.instant.progress # 页面切换进度条
-    - navigation.prune # 只渲染可见导航项
-    # - header.autohide  # 自动隐藏头部
-    # - navigation.prune # 只渲染可见导航项
     - navigation.tracking # 滚动时URL锚点自动更新
     - navigation.tabs # 一级导航显示为顶部Tab
     - navigation.tabs.sticky  # Tab栏吸顶
@@ -54,6 +51,8 @@ theme:
     - search.share # 搜索结果分享
     - toc.follow # 目录跟随滚动
     # - toc.integrate # 目录集成到侧边栏
+    # navigation.prune 与 navigation.expand 互斥，同时开启时只有 prune 生效；
+    # 这里保留 navigation.expand（默认展开所有目录），目录规模变大后可换成 navigation.prune 提速
     - navigation.expand # 默认展开所有目录
     - navigation.indexes # 支持节索引页
     - content.tabs.link # 支持标签页链接
@@ -78,77 +77,11 @@ repo_name: my_notes # 右上角的名字
 
 copyright: Copyright &copy; 2022~2025 fk # 左下角的版权声明
 
-# [Navigtion]
-nav:
-  # - 主页: index.md
-  
-  - 随笔: 
-    - 笔记: 20250904.md
-    - 测试: 20250904-1.md
-  
-  - 开发:
-    - develop/index.md  # 开发首页
-    -  proxmox虚拟机模板制作: develop/proxmox.md
-    - VPS选型和测试: develop/vps选型和测试.md
-    - Trojan终极docker-compose版本: develop/trojan终极docker-compose版本.md
-    - 前端开发:
-      - 前端首页: develop/frontend/index.md
-      - JavaScript: develop/frontend/js.md
-      - CSS: develop/frontend/css.md
-    - 后端开发:
-      - 后端首页: develop/backend/index.md
-      - Python: develop/backend/python.md
-      - 数据库: develop/backend/database.md
-  
-  - 博客:
-    - 博客首页: blog/index.md
-    - 文章:
-      - 测试评论功能: blog/posts/test1.md
-      - 评论测试: blog/posts/test-comment.md
-    # 可以添加分类
-    # - 技术文章:
-    #   - Web开发: blog/tech/web.md
-    #   - 工具使用: blog/tech/tools.md
-    # - 生活随笔:
-    #   - 旅行: blog/life/travel.md
-    #   - 学习: blog/life/learning.md
-  
-  - 笔记:
-    # 可以创建多级分类
-    # - 技术笔记:
-    #   - 编程语言: notes/programming/index.md
-    #   - 框架学习: notes/frameworks/index.md
-    # - 学习笔记:
-    #   - 课程笔记: notes/courses/index.md
-    #   - 读书笔记: notes/books/index.md
-    - 笔记首页: notes/index.md  # 先创建一个首页
-  
-  - 旅行:
-    - 旅行首页: trip/index.md  # 先创建一个首页
-    # - 国内游:
-    #   - 北京: trip/domestic/beijing.md
-    #   - 上海: trip/domestic/shanghai.md
-    # - 国外游:
-    #   - 日本: trip/international/japan.md
-    #   - 泰国: trip/international/thailand.md
-  
-  - 股票:
-    - 股票首页: stock/index.md  # 先创建一个首页
-    # - 投资笔记:
-    #   - 技术分析: stock/analysis/technical.md
-    #   - 基本面分析: stock/analysis/fundamental.md
-    # - 交易记录:
-    #   - 2024年: stock/records/2024.md
-    #   - 2025年: stock/records/2025.md
-  
-  - 友情连接: 
-    - 朋友: link.md
-  
-  - 关于:
-    - 关于我: about/about.md
-    - 个人经历: about/个人经历.md
-  
-  - 留言板: msgboard.md
+# [Navigation]
+# 导航不再手写：由 awesome-pages 插件按目录自动生成。
+# 新增 md 文件后无需改这里，会自动出现在对应分区的侧边栏。
+# 如需调整顺序/标题/分类，在对应目录下建 .pages 文件（格式见 docs/.pages）。
+# 顶层 Tab 的显示顺序与名称在 docs/.pages 里维护。
  
 
 
@@ -204,9 +137,11 @@ extra:
   #     如果你同意,你可以帮助我们让我们的网站更好
 
 plugins:
-  
+
   - search:
       separator: '[\s\u200b\-\u3000\u3001\u3002\uFF0C\uFF0E\uFF1F\uFF01\uFF1B]+'
+  # \u81EA\u52A8\u751F\u6210\u5BFC\u822A\uFF1A\u626B\u63CF\u76EE\u5F55\u4E0B\u6240\u6709 md\uFF0C\u6309 .pages \u89C4\u5219\u6392\u5E8F/\u5206\u7C7B\uFF0C\u672A\u5217\u51FA\u7684\u81EA\u52A8\u8FFD\u52A0
+  - awesome-pages
   # - git-revision-date-localized:
   #     enabled: !ENV [CI, false]  # 改为 false 禁用本地渲染
   #     type: iso_date
@@ -260,6 +195,7 @@ plugins:
  
 
 markdown_extensions:
+  - meta  # 解析 md 顶部的 YAML front matter（title/date/tags 等），原来是隐式默认，显式声明避免被意外丢弃
   - abbr
   - attr_list
   - admonition
@@ -267,7 +203,6 @@ markdown_extensions:
   - footnotes
   # - callouts
   - md_in_html
-  - markdown.extensions.abbr # 支持Markdown文件上方自定义标题标签等
   - pymdownx.magiclink
   - pymdownx.blocks.caption
   - pymdownx.caret
@@ -308,64 +243,35 @@ markdown_extensions:
 
   
 extra_javascript:
-  # 智谱清言翻译系统
+  # 全部改用仓库内本地文件：不再依赖 Wcowin/Wcowin.github.io 这个上游仓库，
+  # 减少跨域请求和首屏阻塞（原来 view.js 在 CDN 上已 404，每次访问都白等一次）
+  - javascripts/unified-instant-handler.js  # 供 footer.html 的 InstantNavigation.register 使用
+  - javascripts/extra.js                    # 错误处理、兼容性修复、性能优化
+  # MathJax 配置必须排在主库之前加载
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  # - javascripts/liquid-glass-toc.js  # Liquid Glass TOC 增强效果
   # - javascripts/glm-config.js
   # - javascripts/glm-translate.js
-  # - javascripts/translate-config.js
-  # - javascripts/highlight-search.js
-  # - docs/javascripts/translate.js
-  # - https://cdn.staticfile.net/translate.js/3.12.0/translate.js
-  # - javascripts/unified-instant-handler.js  # 统一的即时导航处理器
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/javascripts/unified-instant-handler.js
-  # - javascripts/optimize.js
-  # - javascripts/instant-handler.js
-  # 延迟加载非关键脚本
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/javascripts/extra.js  # extra的cdn
-  # - javascripts/mathjax.js
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/javascripts/mathjax.js
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/javascripts/view.js
-  # - javascripts/liquid-glass-toc.js  # Liquid Glass TOC 增强效果
-  # - javascripts/font-loader.js
+
 
 
 
 extra_css:
-  # - stylesheets/highlight-search.css
+  # 全部改用仓库内本地文件。原来 extra.css 既加载本地又加载 CDN 同名文件，
+  # 两份内容不同（CDN 多 8 条规则、少 4 条），等于样式互相覆盖，排查问题非常麻烦。
   - stylesheets/extra.css
   - stylesheets/extra2.css
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/extra.css
-  # - stylesheets/link.css  #友链
+  - stylesheets/link.css      # 友链
+  - stylesheets/customize.css # 按钮圆角化
+  - stylesheets/ziti.css      # 字体
+  - stylesheets/poem.css
+  # - stylesheets/highlight-search.css
   # - stylesheets/optimize.css
-  # - stylesheets/poem.css
-  # - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/poem.css
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/link.css  #友链
   # - stylesheets/card2.css
-  # - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/card2.css
-  # - stylesheets/customize.css  #按钮圆角化
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/customize.css  #按钮圆角化
   # - stylesheets/flink.css
   # - stylesheets/bannerSlider.css
-  # - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/extra.css # extra.css的CDN
-  # - stylesheets/extra1.css
-  # - stylesheets/video.css
-  # - https://unpkg.com/@waline/client@v2/dist/waline.css
-  # - https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.css #评论
-  # - ckplayer/css/ckplayer.css
-  # - https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css
-  # - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css  #字体
-  # - https://static.zeoseven.com/zsft/292/main/result.css #字体
-  # - stylesheets/ziti.css  #字体
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/ziti.css #字体
-  # - https://fontsapi.zeoseven.com/292/main/result.css
-  # - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/ziti.css?display=swap
-  # - https://chinese-fonts-cdn.deno.COMMENT_DIRECTORIES = ['blog/', 'develop/','trip/','relax/']/packages/lxgwwenkai/dist/LXGWWenKai-Bold/result.css
-  # - https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css # font-awesome表情支持
-  # - stylesheets/timeline.css
-  # - stylesheets/LiquidGlass.css
-  # - about/sty/portfolio.css
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/about/sty/portfolio.css
-  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/stylesheets/poem.css
+
 
 watch: #监听文件变动自动刷新
   - docs
@@ -374,6 +280,7 @@ watch: #监听文件变动自动刷新
 
 hooks:
   # - docs/overrides/hooks/socialmedia.py
+  - docs/overrides/hooks/auto_nav_title.py  # 给自动导航的页面补标题（取正文 H1）
   - docs/overrides/hooks/reading_time.py
   # - docs/overrides/hooks/ai_summary.py  # 添加AI摘要hook
   - docs/overrides/hooks/related_posts.py

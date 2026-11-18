@@ -323,6 +323,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 </script> -->
 
+<!-- 评论区由 front matter 的 comments: true 触发 partials/comments.html（Giscus）注入，
+     原来这里又内嵌了一份 Giscus，导致同一页加载两次评论组件，已移除。
+     如需改回手写 Giscus，请把上面的 comments 设为 false 再放开下面这段。
+
 <head> 
 <script src="https://giscus.app/client.js"
         data-repo="KkaiFang/my_notes"
@@ -340,6 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
         async>
 </script>
 </head>
+--> 
 
 <!-- tw开始 -->
 

@@ -5,7 +5,9 @@ hide:
 #   - toc #显示左
   - footer
   - feedback
-comments: true
+# 评论由 docs/overrides/hooks/comments.py 自动注入 Twikoo，
+# 这里不要再写 comments: true，否则会额外再加载一套 Giscus，同页出现两个评论区。
+comments: false
 ---
 如果要保证 **Ubuntu 云镜像克隆后每台机器都自动生成唯一的 machine-id** 和 **DHCP 客户端 ID**（避免 IP 冲突），可以结合 **cloud-init + netplan** 这样配置。
 

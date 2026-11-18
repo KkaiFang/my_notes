@@ -168,6 +168,40 @@ footer a:hover {
   color: #6c757d;
 } */
 
+/* ------------------------------------------------------------------
+ * 以下规则原本只存在于 CDN 版 extra.css（Wcowin 上游仓库）。
+ * 改为本地加载后在此保留，避免样式丢失。
+ * ------------------------------------------------------------------ */
+
+/* 社交图标尺寸 */
+.md-social__link svg {
+  max-height: 1rem;
+}
+
+/* 标记（ins）和删除线（del）配色 */
+.md-typeset del {
+  color: rgba(81, 143, 193, 0.6);
+  text-decoration: line-through;
+  text-decoration-color: rgba(81, 143, 193, 0.5);
+}
+
+.md-typeset ins {
+  color: #518FC1;
+  background: rgba(81, 143, 193, 0.08);
+  text-decoration: none;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+[data-md-color-scheme="slate"] .md-typeset del {
+  color: rgba(110, 203, 255, 0.6);
+}
+
+[data-md-color-scheme="slate"] .md-typeset ins {
+  color: #6ecbff;
+  background: rgba(110, 203, 255, 0.08);
+}
+
 
 
 /*圆角*/

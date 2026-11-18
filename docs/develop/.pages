@@ -1,0 +1,14 @@
+# 开发栏目
+#
+# 这里只写「希望排在前面」的条目，其余 md 文件会自动追加到后面。
+# 新增文件不用改这里，除非你想控制顺序或标题。
+
+title: 开发
+nav:
+  - index.md
+  - proxmox虚拟机模板制作: proxmox.md
+  - VPS选型和测试: vps选型和测试.md
+  - Trojan终极docker-compose版本: trojan终极docker-compose版本.md
+  - 前端开发: frontend
+  - 后端开发: backend
+  - ...   # 未在上面列出的 md 自动追加到这里

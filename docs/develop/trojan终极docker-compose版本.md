@@ -132,11 +132,9 @@ docker exec -it trojan_container_id  bash
 ```
 
 安装trojan
-![alt text](image.png)
-![alt text](image-1.png)
+
 **这里显示失败正常，因为还没配置证书**
-![alt text](image-2.png)
-![alt text](image-3.png)
+
 ```
 运行完后进入容器 docker exec -it trojan bash, 然后输入'trojan'即可进行初始化安装
 

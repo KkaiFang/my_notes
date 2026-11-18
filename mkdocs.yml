@@ -89,6 +89,8 @@ nav:
   - 开发:
     - develop/index.md  # 开发首页
     -  proxmox虚拟机模板制作: develop/proxmox.md
+    - VPS选型和测试: develop/vps选型和测试.md
+    - Trojan终极docker-compose版本: develop/trojan终极docker-compose版本.md
     - 前端开发:
       - 前端首页: develop/frontend/index.md
       - JavaScript: develop/frontend/js.md

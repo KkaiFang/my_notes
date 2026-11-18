@@ -279,13 +279,9 @@ watch: #监听文件变动自动刷新
   - docs/overrides
 
 hooks:
-  # - docs/overrides/hooks/socialmedia.py
   - docs/overrides/hooks/auto_nav_title.py  # 给自动导航的页面补标题（取正文 H1）
-  - docs/overrides/hooks/reading_time.py
-  # - docs/overrides/hooks/ai_summary.py  # 添加AI摘要hook
-  - docs/overrides/hooks/related_posts.py
-  # - docs/overrides/hooks/toc_optimizer.py
-  # - docs/overrides/hooks/last_updated.py
-  # - docs/overrides/hooks/reading_progress.py
-  - docs/overrides/hooks/comments.py       # 新添加的文章页面评论系统
-  # - docs/hook-sqlite-js/plugin.py
+  - docs/overrides/hooks/reading_time.py    # 正文顶部插入阅读时长提示
+  - docs/overrides/hooks/related_posts.py   # 底部相关文章推荐
+  - docs/overrides/hooks/comments.py        # 自动注入 Twikoo 评论
+  # 其余 hook 未启用：
+  #   socialmedia.py / toc_optimizer.py / last_updated.py / reading_progress.py

@@ -5,11 +5,11 @@
 ```
 curl https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh -sSf | sh
 ```
-![alt text](image.png)
+![backtrace 网络测试](vps-backtrace.png)
 
 
 ### cpu跑分 单核高于1500为及格
 ```
 curl -sL https://yabs.sh | bash -s -- -fi
 ```
-![alt text](image-1.png)
+![YABS CPU 跑分](vps-yabs.png)

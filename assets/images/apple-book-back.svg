@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- 背景圆形 -->
+  <circle cx="200" cy="200" r="190" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+  
+  <!-- 打开的书本 -->
+  <g transform="translate(140, 180)">
+    <!-- 左页 -->
+    <path d="M0 20 Q0 0, 20 0 L50 0 L50 80 L20 80 Q0 80, 0 60 Z" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <!-- 右页 -->
+    <path d="M50 0 L80 0 Q100 0, 100 20 L100 60 Q100 80, 80 80 L50 80 Z" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    
+    <!-- 书本装订线 -->
+    <line x1="50" y1="0" x2="50" y2="80" stroke="#94a3b8" stroke-width="2"/>
+    
+    <!-- 文字线条 -->
+    <line x1="8" y1="15" x2="42" y2="15" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+    <line x1="8" y1="25" x2="38" y2="25" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+    <line x1="8" y1="35" x2="40" y2="35" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+    
+    <line x1="58" y1="15" x2="92" y2="15" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+    <line x1="58" y1="25" x2="88" y2="25" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+    <line x1="58" y1="35" x2="90" y2="35" stroke="#64748b" stroke-width="1" opacity="0.6"/>
+  </g>
+  
+  <!-- 苹果（不同角度） -->
+  <g transform="translate(200, 100)">
+    <!-- 苹果主体 -->
+    <path d="M50 25 C70 15, 90 25, 90 55 C90 85, 70 105, 50 105 C30 105, 10 85, 10 55 C10 25, 30 15, 50 25 Z" fill="#dc2626"/>
+    
+    <!-- 苹果凹陷 -->
+    <path d="M45 20 C48 18, 52 18, 55 20 C52 25, 48 25, 45 20 Z" fill="#b91c1c"/>
+    
+    <!-- 苹果高光 -->
+    <ellipse cx="35" cy="45" rx="6" ry="12" fill="#f87171" opacity="0.7"/>
+    
+    <!-- 苹果叶子 -->
+    <path d="M48 18 C48 13, 53 8, 58 13 C63 18, 58 23, 53 18 Z" fill="#16a34a"/>
+    
+    <!-- 苹果茎 -->
+    <rect x="48" y="15" width="4" height="6" rx="2" fill="#a16207"/>
+  </g>
+  
+  <!-- 知识符号 -->
+  <g transform="translate(120, 120)" opacity="0.4">
+    <!-- 灯泡 -->
+    <circle cx="0" cy="0" r="12" fill="none" stroke="#f59e0b" stroke-width="2"/>
+    <path d="M-6 -8 L6 8 M6 -8 L-6 8" stroke="#f59e0b" stroke-width="2"/>
+  </g>
+  
+  <g transform="translate(280, 250)" opacity="0.4">
+    <!-- 铅笔 -->
+    <rect x="0" y="0" width="3" height="20" fill="#fbbf24"/>
+    <polygon points="0,0 3,0 1.5,-4" fill="#f59e0b"/>
+    <rect x="0" y="16" width="3" height="4" fill="#ec4899"/>
+  </g>
+  
+  <!-- 装饰点 -->
+  <g opacity="0.2">
+    <circle cx="90" cy="280" r="2" fill="#8b5cf6"/>
+    <circle cx="310" cy="140" r="3" fill="#06b6d4"/>
+    <circle cx="340" cy="320" r="2" fill="#10b981"/>
+  </g>
+</svg>

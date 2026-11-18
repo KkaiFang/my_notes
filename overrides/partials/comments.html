@@ -1,0 +1,22 @@
+{#-
+  Giscus 评论区（GitHub Discussions）
+
+  配置挂在一个普通 <div> 上，而不是 <script> 标签上：站点开启了 navigation.instant，
+  Material 做无刷新切页时会把容器内所有 <script> 替换成新建元素，内联脚本的属性
+  会被全部丢弃（只搬运 src），挂在上面的配置随之消失，评论区就再也渲染不出来。
+
+  真正的 giscus client.js 由 javascripts/comments.js 在首次加载和每次切页后插入。
+-#}
+{% if page.meta.comments %}
+  <h2 id="__comments">{{ lang.t("meta.comments") }}</h2>
+
+  <div id="giscus-container"
+       class="giscus-container"
+       data-giscus-placeholder
+       data-giscus-repo="KkaiFang/my_notes"
+       data-giscus-repo-id="R_kgDOPpzuUQ"
+       data-giscus-category="General"
+       data-giscus-category-id="DIC_kwDOPpzuUc4CvmJw">
+    <p class="giscus-loading" style="text-align: center; color: #666; padding: 2rem;">评论系统加载中...</p>
+  </div>
+{% endif %}
